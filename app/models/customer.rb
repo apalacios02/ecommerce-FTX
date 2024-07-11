@@ -1,4 +1,7 @@
 class Customer < ApplicationRecord
-    has_many :orders
+  def self.ransackable_attributes(auth_object = nil)
+    ["address", "created_at", "email", "id", "id_value", "name", "password", "phone", "updated_at"]
+  end
+  
   end
   
