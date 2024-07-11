@@ -1,4 +1,4 @@
-class CreateOrderItems < ActiveRecord::Migration[7.1]
+class CreateOrderItems < ActiveRecord::Migration[6.1]
   def change
     create_table :order_items do |t|
       t.references :order, null: false, foreign_key: true
@@ -6,8 +6,6 @@ class CreateOrderItems < ActiveRecord::Migration[7.1]
       t.integer :quantity
       t.decimal :price
       t.decimal :tax
-      t.datetime :created_at
-
       t.timestamps
     end
   end
