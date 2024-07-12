@@ -7,7 +7,8 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    # Show action implementation
+    @category = Category.find(params[:id])
+    @products = @category.products # Fetch products associated with this cate
   end
 
   def new
