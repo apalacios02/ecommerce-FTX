@@ -7,6 +7,14 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @product = Product.find(params[:id])
+    @category = @product.category
+    @breadcrumbs = [
+      { label: "Home", path: root_path },
+      { label: "Categories", path: categories_path },
+      { label: @category.name, path: category_path(@category) },
+      { label: @product.name, path: product_path(@product) }
+    ]
   end
 
   def new

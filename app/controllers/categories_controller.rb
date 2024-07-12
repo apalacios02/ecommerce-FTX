@@ -9,6 +9,11 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.find(params[:id])
     @products = @category.products # Fetch products associated with this cate
+    @breadcrumbs = [
+      { label: "Home", path: root_path },
+      { label: "Categories", path: categories_path },
+      { label: @category.name, path: category_path(@category) }
+    ]
   end
 
   def new
