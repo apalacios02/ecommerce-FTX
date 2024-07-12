@@ -6,11 +6,11 @@ class PagesController < ApplicationController
     end
   
     def about
-      # Add logic if needed
+      @page = Page.find_by(slug: 'about') # Adjust this query based on your `slug` or `title` logic
     end
   
     def contact
-      # Add logic if needed
+      @page = Page.find_by(slug: 'contact') # Adjust this query based on your `slug` or `title` logic
     end
   
     def privacy_policy
