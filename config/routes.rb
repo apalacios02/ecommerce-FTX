@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   get 'privacy_policy', to: 'pages#privacy_policy' # Route for Privacy Policy page
   
   # Add more routes as needed
+  resources :customers
 end
