@@ -3,7 +3,7 @@ class PagesController < ApplicationController
     def index
       @categories = Category.all # Example: Fetch all categories
       # @featured_products = Product.featured.limit(4) # Example: Fetch featured products
-      @products = Product.all # Fetch all products or use a scope/method as needed
+      @products = Product.page(params[:page]).per(5) # Adjust per(10) as needed
     end
   
     def about
