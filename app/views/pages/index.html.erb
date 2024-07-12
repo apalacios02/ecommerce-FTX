@@ -1,7 +1,25 @@
 <!-- app/views/pages/index.html.erb -->
 <h1>Welcome to FTX NFT Online Store</h1>
 
-<h2>Featured Products</h2>
+<h2>Product Categories</h2>
+
+<ul>
+  <% @categories.each do |category| %>
+    <li><%= link_to category.name, category_path(category) %></li>
+  <% end %>
+</ul>
+
+
+<h2>Available Products</h2>
+
+<ul>
+  <% @products.each do |product| %>
+    <li>
+      <%= link_to product.name, product_path(product) %> -
+      <%= number_to_currency(product.price) %>
+    </li>
+  <% end %>
+</ul>
 
 <!-- Link to Customer Index Page -->
 <p><%= link_to "Customers", customers_path %></p>

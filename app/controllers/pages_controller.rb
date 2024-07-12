@@ -1,8 +1,9 @@
 # app/controllers/pages_controller.rb
 class PagesController < ApplicationController
     def index
-      # @categories = Category.all # Example: Fetch all categories
+      @categories = Category.all # Example: Fetch all categories
       # @featured_products = Product.featured.limit(4) # Example: Fetch featured products
+      @products = Product.all # Fetch all products or use a scope/method as needed
     end
   
     def about
