@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   
   # Add more routes as needed
   resources :customers
+  resources :products
+  resources :categories
 end
