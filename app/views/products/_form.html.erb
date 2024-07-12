@@ -27,6 +27,11 @@
     <%= form.text_field :price %>
   </div>
 
+  <%# <div class="field"> %>
+    <%# <%= form.label :image %> 
+    <%# <%= form.file_field :image %> 
+  <%# </div> %>
+
    <div class="field">
     <%= form.label :category_id, "Category" %>
     <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: true }, { class: 'form-control' } %>
