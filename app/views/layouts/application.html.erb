@@ -11,6 +11,16 @@
   </head>
 
   <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <div>
+      <% if customer_signed_in? %>
+        <%= link_to "Customer_Profile", edit_customer_registration_path %>
+        <%= button_to "Logout", destroy_customer_session_path, method: :delete %>
+      <% end %>
+    </div>
+
     <%= yield %>
     <%= render 'shared/breadcrumbs' %>
   </body>
