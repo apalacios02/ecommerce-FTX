@@ -36,6 +36,12 @@
     <%= form.text_field :phone %>
   </div>
 
+    <!-- Dropdown for selecting province -->
+  <div class="field">
+    <%= form.label :province_id, "Province" %>
+    <%= form.collection_select :province_id, Province.all, :id, :name, { include_blank: true }, { class: 'form-control' } %>
+  </div>
+
   <div class="actions">
     <%= form.submit 'Save' %>
   </div>
