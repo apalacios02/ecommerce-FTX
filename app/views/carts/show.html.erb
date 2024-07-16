@@ -1,0 +1,17 @@
+<h1>Your Shopping Cart</h1>
+
+<% if @cart.empty? %>
+  <p>Your cart is empty.</p>
+<% else %>
+  <ul>
+    <% @cart.each do |product_id, quantity| %>
+      <% product = Product.find(product_id) %>
+      <li>
+        Product: <%= product.name %>, Quantity: <%= quantity %>
+        <!-- Add remove or update links/buttons here -->
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<p><%= link_to 'Back to Home', root_path %></p>

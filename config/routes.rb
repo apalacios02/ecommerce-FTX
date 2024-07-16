@@ -14,6 +14,13 @@ Rails.application.routes.draw do
   resources :products
   resources :categories
   resources :provinces
+  resource :cart, only: [:show, :update, :destroy] do
+    post 'add/:product_id', action: 'add', as: 'add_to'
+    get 'add/:product_id', action: 'add', as: 'add_to_get'  # Add GET route
+    # add more routes as needed (e.g., remove, update quantity)
+    delete 'remove/:product_id', action: 'remove', as: 'remove_from'
+    patch 'update/:product_id', action: 'update', as: 'update_quantity'
+  end
 
 
   
