@@ -18,8 +18,8 @@ Rails.application.routes.draw do
     post 'add/:product_id', action: 'add', as: 'add_to'
     get 'add/:product_id', action: 'add', as: 'add_to_get'  # Add GET route
     # add more routes as needed (e.g., remove, update quantity)
-    delete 'remove/:product_id', action: 'remove', as: 'remove_from'
-    patch 'update/:product_id', action: 'update', as: 'update_quantity'
+    patch 'update_item', on: :collection
+    delete 'remove_item', on: :collection
   end
 
 

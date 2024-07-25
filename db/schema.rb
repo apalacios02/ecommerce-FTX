@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_16_071102) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_12_025146) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -65,18 +65,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_16_071102) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "cart_items", force: :cascade do |t|
-    t.integer "product_id"
-    t.integer "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "carts", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -85,19 +73,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_16_071102) do
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+    t.string "email", null: false
+    t.string "encrypted_password", null: false, default: ""
     t.string "address"
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "province_id", default: 1
-    t.index ["email"], name: "index_customers_on_email", unique: true
-    t.index ["province_id"], name: "index_customers_on_province_id"
-    t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+    t.index ["email"], unique: true
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -141,15 +123,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_16_071102) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
-  create_table "provinces", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "customers", "provinces"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "customers"

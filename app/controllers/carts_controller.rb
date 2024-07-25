@@ -14,30 +14,29 @@ class CartsController < ApplicationController
     redirect_to cart_path
   end
 
-  def remove
-    product_id = params[:product_id].to_i
-    @cart = session[:cart] ||= {}
-    
-    # Remove product from cart
-    @cart.delete(product_id)
-    
-    redirect_to cart_path
-  end
-
-  def update
-    product_id = params[:product_id].to_i
+  def update_item
+    @cart = session[:cart] || {}
+    product_id = params[:product_id]
     quantity = params[:quantity].to_i
-    @cart = session[:cart] ||= {}
-    
-    # Update quantity of product in cart
-    if quantity <= 0
-      @cart.delete(product_id)
-    else
+
+    if quantity > 0
       @cart[product_id] = quantity
+    else
+      @cart.delete(product_id)
     end
-    
-    redirect_to cart_path
+
+    session[:cart] = @cart
+    redirect_to cart_path, notice: 'Cart updated successfully'
   end
 
+  def remove_item
+    @cart = session[:cart] || {}
+    product_id = params[:product_id]
+
+    @cart.delete(product_id)
+    session[:cart] = @cart
+    redirect_to cart_path, notice: 'Item removed successfully'
+  end
+  
   # Other actions like destroy, clear cart, etc.
 end

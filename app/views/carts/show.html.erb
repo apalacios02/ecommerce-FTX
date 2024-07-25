@@ -7,8 +7,16 @@
     <% @cart.each do |product_id, quantity| %>
       <% product = Product.find(product_id) %>
       <li>
-        Product: <%= product.name %>, Quantity: <%= quantity %>
-        <!-- Add remove or update links/buttons here -->
+        Product: <%= product.name %>, Quantity: 
+        <%= form_with url: update_item_cart_path, method: :patch, local: true do %>
+          <%= hidden_field_tag :product_id, product_id %>
+          <%= number_field_tag :quantity, quantity, min: 0 %>
+          <%= submit_tag 'Update' %>
+        <% end %>
+        <%= form_with url: remove_item_cart_path, method: :delete, local: true do %>
+          <%= hidden_field_tag :product_id, product_id %>
+          <%= submit_tag 'Remove' %>
+        <% end %>
       </li>
     <% end %>
   </ul>

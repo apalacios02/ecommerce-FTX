@@ -13,6 +13,6 @@ class Product < ApplicationRecord
   has_many :order_items
 
   # Active Storage association for product image
-  # has_one_attached :image
+  has_one_attached :image
   
 end
