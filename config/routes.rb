@@ -1,4 +1,3 @@
-# config/routes.rb
 Rails.application.routes.draw do
   devise_for :customers
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -9,11 +8,19 @@ Rails.application.routes.draw do
   get '/contact', to: 'pages#contact', as: 'contact'
   get 'privacy_policy', to: 'pages#privacy_policy' # Route for Privacy Policy page
   
+  resources :checkouts, only: [:create] do
+    collection do
+      get 'success'
+      get 'cancel'
+    end
+  end
+
   # Add more routes as needed
   resources :customers
   resources :products
   resources :categories
   resources :provinces
+
   resource :cart, only: [:show, :update, :destroy] do
     post 'add/:product_id', action: 'add', as: 'add_to'
     get 'add/:product_id', action: 'add', as: 'add_to_get'  # Add GET route
@@ -21,7 +28,4 @@ Rails.application.routes.draw do
     patch 'update_item', on: :collection
     delete 'remove_item', on: :collection
   end
-
-
-  
 end
