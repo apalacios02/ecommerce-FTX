@@ -1,0 +1,40 @@
+<h1>Checkout</h1>
+
+<%= form_with model: [@customer, @order], local: true do |form| %>
+  <fieldset>
+    <legend>Customer Details</legend>
+    <%= form.fields_for :customer do |customer_fields| %>
+      <div>
+        <%= customer_fields.label :name %>
+        <%= customer_fields.text_field :name %>
+      </div>
+      <div>
+        <%= customer_fields.label :address %>
+        <%= customer_fields.text_field :address %>
+      </div>
+      <div>
+        <%= customer_fields.label :province_id %>
+        <%= customer_fields.collection_select :province_id, Province.all, :id, :name %>
+      </div>
+    <% end %>
+  </fieldset>
+
+  <fieldset>
+    <legend>Order Items</legend>
+    <%= form.fields_for :order_items do |item_fields| %>
+      <% @cart.cart_items.each do |item| %>
+        <% product = Product.find(item.product_id) %>
+        <div>
+          <%= item_fields.hidden_field :product_id, value: product.id %>
+          <%= item_fields.hidden_field :quantity, value: item.quantity %>
+          <%= item_fields.hidden_field :price, value: product.price %>
+          <%= product.name %> - Quantity: <%= item.quantity %>
+        </div>
+      <% end %>
+    <% end %>
+  </fieldset>
+
+  <div>
+    <%= form.submit 'Place Order' %>
+  </div>
+<% end %>

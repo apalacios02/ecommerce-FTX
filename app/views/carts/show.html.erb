@@ -4,8 +4,10 @@
   <p>Your cart is empty.</p>
 <% else %>
   <ul>
+    <% total_amount = 0 %>
     <% @cart.each do |product_id, quantity| %>
       <% product = Product.find(product_id) %>
+      <% total_amount += product.price * quantity %>
       <li>
         Product: <%= product.name %>, Quantity: 
         <%= form_with url: update_item_cart_path, method: :patch, local: true do %>
@@ -20,6 +22,8 @@
       </li>
     <% end %>
   </ul>
+  <p>Total Amount: <%= number_to_currency(total_amount) %></p>
+  <%= button_to 'Checkout with Stripe', checkouts_path, remote: true, data: { disable_with: "validating..."} %>
 <% end %>
 
 <p><%= link_to 'Back to Home', root_path %></p>
